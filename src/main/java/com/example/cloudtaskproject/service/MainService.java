@@ -8,6 +8,7 @@ import java.io.*;
 @Service
 public class MainService {
     public String findMaxValue(MultipartFile file) throws IOException {
+        System.out.println("");
         String tmp;
         int max = 0;
         int lineNumber = 1;

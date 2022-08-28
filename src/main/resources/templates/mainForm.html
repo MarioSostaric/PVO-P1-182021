@@ -1,0 +1,38 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Boot Thymeleaf - Bootstrap WebJars</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div class="container">
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 text-center mt-2"><h3 class="display-4">Please choose a file you want to upload</h3></div>
+    <div class="col-4 text-center justify-content-center mt-2">
+        <div>
+            <form method="POST" enctype="multipart/form-data" action="/">
+                <input type="file" class="form-control form-control-lg" name="file"/><br/>
+                <input type="submit" class="btn btn-lg btn-primary" value="Upload"/>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 text-center mt-2" th:if="${message}">
+        <h3 th:text="${message}"/>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 text-success text-center mt-2" th:if="${result}">
+        <h2 th:text="${result}"/>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-12 text-danger text-center mt-1" th:if="${elapsedTime}">
+        <h4 th:text="${elapsedTime}"/>
+    </div>
+</div>
+</body>
+</html>

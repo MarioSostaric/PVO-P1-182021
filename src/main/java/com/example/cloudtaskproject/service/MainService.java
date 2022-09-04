@@ -22,6 +22,7 @@ public class MainService {
     public String findMaxValue(MultipartFile file) throws IOException {
         System.out.println("");
         String filePath=file.getOriginalFilename();
+        String errorResult="";
         String tmp;
         int max = 0;
         int lineNumber = 1;
@@ -37,7 +38,7 @@ public class MainService {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
                 while ((tmp = reader.readLine()) != null) {
                     if (Integer.parseInt(tmp) > 1023 || Integer.parseInt(tmp) < 0) {
-                        return "2 - Error in calculation.";
+                        errorResult="2 - Error in calculation.";
                     }
                     if (Integer.parseInt(tmp) > max) {
                         max = Integer.parseInt(tmp);
@@ -52,11 +53,14 @@ public class MainService {
         }
         int last = stringBuilder.lastIndexOf("\n");
         if (last >= 0) { stringBuilder.delete(last, stringBuilder.length()); }
-        uploadObject(filePath,stringBuilder);
+        uploadObject(filePath,stringBuilder.toString());
+        if(!errorResult.isEmpty()){
+            return errorResult;
+        }
         return "Status code: OK \n The maximum value in the file is: " + max + " and the location (line number) is: " + lineNumber;
     }
     public static void uploadObject(
-            String filePath,StringBuilder stringBuilder) throws IOException {
+            String filePath,String stringBuilder) throws IOException {
         // The ID of your GCP project
         String projectId = "pvo-p1";
 
@@ -72,7 +76,7 @@ public class MainService {
 
         BlobId blobId = BlobId.of(bucketName, objectName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
-        storage.create(blobInfo, stringBuilder.toString().getBytes());
+        storage.create(blobInfo, stringBuilder.getBytes());
 
         System.out.println(
                 "File " + filePath + " uploaded to bucket " + bucketName + " as " + objectName);

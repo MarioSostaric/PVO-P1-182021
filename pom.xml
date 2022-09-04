@@ -37,6 +37,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.google.cloud.functions</groupId>
+            <artifactId>functions-framework-api</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-storage</artifactId>
+            <version>1.17.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>5.2.0</version>
@@ -62,7 +72,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
-                    <projectId>pvo-project1-360821</projectId>
+                    <projectId>pvo-p1</projectId>
                     <version>GCLOUD_CONFIG</version>
                 </configuration>
             </plugin>
